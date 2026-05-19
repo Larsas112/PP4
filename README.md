@@ -58,7 +58,13 @@ In this exercise you will:
 # 1) The exact ssh command you ran
 # 2) A detailed, step-by-step explanation of what happened at each stage
 ```
-
+1) ssh -v Lars311739@128.140.85.215
+2) Aufzählung
+  1) Zunächst wird der Anwendung OpenSSH_for_Windows der ssh command weitergeleitet
+  2) danach wird die Verbindung mit dem Server an port 22 hergestellt
+  3) es erfolgt die abfrage nach Identifikations-Schlüsseln, um herauszufinden welcher verwendet wird und welcher Schlüssel angefragt werden soll.
+  4) Da kein schlüssel gefunden wurde, wird ein Versionsabgleich auf kompatibilität angestoßen.
+  5)  
 ---
 
 ### Task 2: Ed25519 Key Pair
