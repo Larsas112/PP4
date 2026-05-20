@@ -61,10 +61,19 @@ In this exercise you will:
 1) ssh -v Lars311739@128.140.85.215
 2) Aufzählung
   1) Zunächst wird der Anwendung OpenSSH_for_Windows der ssh command weitergeleitet
-  2) danach wird die Verbindung mit dem Server an port 22 hergestellt
-  3) es erfolgt die abfrage nach Identifikations-Schlüsseln, um herauszufinden welcher verwendet wird und welcher Schlüssel angefragt werden soll.
-  4) Da kein schlüssel gefunden wurde, wird ein Versionsabgleich auf kompatibilität angestoßen.
-  5)  
+  2) Danach wird die Verbindung mit dem Server an port 22 hergestellt
+  3) Es erfolgt ein Aufrufen aller möglichen Dateien in denen ein Identifikations-Schlüssel stecken könnte.
+  4) Es wird ein Versionsabgleich auf kompatibilität durchgeführt.
+  5) Nun erfolgt die Abfrage des Benutzers aus dem Command.
+  6) Mit kex werden die eventuell gefundenen Keys mit dem beim Host festgelegten ausgetauscht.
+  7) Da der gefundene Key, welcher für GitHub angelegt wurde nicht mit dem vom Host erwarteten übereinstimmt, werden alle weiteren Schlüssel die vorher gefunden wurden ausprobiert.
+  8) Da kein weiterer Key gefunden wurde fragt kex, welche weiteren verfikationsmöglichkeiten bei openssh.com hinterlegt sind, publickey und password.
+  9) Es werden erneut die Keys abgefragt und dann wird der user zur eingabe des passwortes aufgefordert.
+  10) Ich bin Authentifiziert
+  11) An openssh.com wird gemeldet, dass keine weitere anforderung erfolgt.
+  12) Für die Bedienung werden nun die Jeweiligen Funktionen, zur nutzung aktiviert.
+  13) Es erfolgt noch eine abrafe auf Host-Keys
+  14) Verbindung steht.
 ---
 
 ### Task 2: Ed25519 Key Pair
@@ -94,7 +103,9 @@ In this exercise you will:
 # 2) The file paths of the generated keys
 # 3) Your written explanation (3–5 sentences) of the signature process
 ```
-
+1) ssh-keygen -t ed25519 -C lars.sandkuehler@stud.thga.de
+2) "C:\Users\spiel\vorlesungsserver.pub"
+3) Da beiden (Server und Users) der Public Key bekannt ist, kann der aufgeforderte z.b Server eine Aufgabe (challenge) generieren die nur mithilfe des public Keys gelöst werden kann. Das ergebnis wird dann vom User gelöst und an den Server übermittelt. Das ganze ist so verschlüsselt, dass auch mit der Lösung die zurück geschickt wird kein Rückschluss auf den Key möglich ist. Mit der Lösung ist der User dann auf dem Server authentifiziert. Ed25519 bietet eine so komplexe rechenstruktur zugrunde, dass zum knacken des Codes ein Super-Computer notwendig wäre. Den entscheidenden Vorteil bietet ein Key dadruch, dass kein Passwort über das Netzwerk übermittelt wird.
 ---
 
 ### Task 3: SSH Config File
